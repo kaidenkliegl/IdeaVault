@@ -16,9 +16,9 @@ def notes(notebook_id):
 #create new note in a notebook
 @notes_routes.route('notebooks/<int:notebookId>/notes', methods=['POST'])
 @login_required
-def notes(notebook_id):
+def new_note(notebook_id):
     data = request.get_json()
-    tite = data.get("title")
+    title = data.get("title")
     content = content.get("content")
 
     new_note = Notes(
@@ -32,5 +32,37 @@ def notes(notebook_id):
 
     return {'note': new_note.to_dict()}, 201
 
+#get a single note by id. Including the associated tags and tasks.
+@note_routes.route('/<int:id>', methods=["GET"])
+def get_note(id):
+    note = Notes.query.filter_by(id = id).one()
+    return {"note": note.to_dict()}
+    
+#edit a note 
+@note_routes.route('/<int:id>', methods=["PUT"])
+def get_note(id):
+    note = Notes.query.filter_by(id=id).one()
+
+    data = request.get_json()
+    title = data.get("title")
+    content = data.get("content")
+
+    if title is not None
+        note.title = title
+    if content is not None
+        note.content = content
+
+    db.session.commit()
+    
+    return {note: note.to_dict()}, 200
+    
+
 # Delete a note 
-@note_routes.route('/<id>', methods=["PUT"])
+@note_routes.route('/<int:id>', methods=["DELETE"])
+def delete_note(id):
+    note = Note.query.filter_by(id = id).one()
+
+    db.session.delete(note)
+    db.session.commit()
+
+    return { "message": "Note deleted." }, 200
