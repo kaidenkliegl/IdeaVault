@@ -2,12 +2,9 @@ from app.models import db, Notes, environment, SCHEMA
 from sqlalchemy.sql import text
 
 def seed_notes():
-    note1 = Notes(
-        notebook_id=1, title="First Note", content="Content for the first note")
-    note2 = Notes(
-        notebook_id=3, title="Second Note", content="Content for the second note")
-    note3 = Notes(
-        notebook_id=3, title="Third Note", content="Another bit of content")
+    tag1 = Tag(name="Important", user_id=1)
+    tag2 = Tag(name="Work", user_id=1)
+    tag3 = Tag(name="Personal", user_id=2)
 
     db.session.add_all([note1, note2, note3])
     db.session.commit()
