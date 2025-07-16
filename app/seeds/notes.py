@@ -7,7 +7,7 @@ def seed_notes():
        notebook_id=1, title="", content="")
     note2 = Note(
         notebook_id=3, title="", content=""))
-    note3 = NOtes(
+    note3 = Note(
         notebook_id=3, title="", content=""))
 
     db.session.add(note1)
