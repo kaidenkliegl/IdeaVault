@@ -36,24 +36,24 @@ def create_new_tag():
 @tag_routes.route("/<int:tag_id>", methods=["PUT"])
 @login_required
 def edit_tag(tag_id):
-    data = request.get_json()
-    name = data.get("name")
+    form = TagForm()
+    form['csrf_token'].data = request.cookies.get('csrf_token')
+    form.name.data = request.json.get('name')
 
-    if not name:
-        return {"error": "Tag name is required"}, 400
+    if form.validate():
+        tag = Tag.query.get(tag_id)
 
-    tag = Tag.query.get(tag_id)
+        if not tag:
+            return {"error": "Tag not found"}, 404
 
-    if not tag:
-        return {"error": "Tag not found"}, 404
+        if tag.user_id != current_user.id:
+            return {"error": "Unauthorized"}, 403
 
-    if tag.user_id != current_user.id:
-        return {"error": "Unauthorized"}, 403
+        tag.name = form.name.data
+        db.session.commit()
+        return {"tag": tag.to_dict()}, 200
 
-    tag.name = name
-    db.session.commit()
-
-    return {"tag": tag.to_dict()}, 200
+    return {'errors': form.errors}, 400
 
 
 # Delete tag

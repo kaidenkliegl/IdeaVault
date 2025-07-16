@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import Notes
+from app.forms import NotesForm
 
 notes_routes = Blueprint('notes', __name__)
 
@@ -17,44 +18,60 @@ def notes(notebook_id):
 @notes_routes.route('notebooks/<int:notebookId>/notes', methods=['POST'])
 @login_required
 def new_note(notebook_id):
-    data = request.get_json()
-    title = data.get("title")
-    content = content.get("content")
+    form = NotesForm()
+    form['csrf_token'].data = request.cookies.get('csrf_token')
+    form.name.data = request.json.get('name')
+    form.content.data = request.json.get('content')
 
-    new_note = Notes(
-        notebook_id = notebook_id,
-        title = title, 
-        content = content
-    )
+    notebook = Notebooks.query.get(notebook_id)
+    if not notebook:
+        return {"error": "Notebook does not exist"}, 404
 
-    db.session.create(new_note)
-    db.session.commit()
+    if form.validate():
+        new_note = Notes(
+            title=form.name.data,
+            content=form.content.data,
+            notebook_id=notebook_id,
+            user_id=current_user.id  
+        )
+        db.session.add(new_note)
+        db.session.commit()
+        return {"note": new_note.to_dict()}, 201
 
-    return {'note': new_note.to_dict()}, 201
+    return {"errors": form.errors}, 400
+
 
 #get a single note by id. Including the associated tags and tasks.
 @note_routes.route('/<int:id>', methods=["GET"])
 def get_note(id):
     note = Notes.query.filter_by(id = id).one()
     return {"note": note.to_dict()}
+
+    
     
 #edit a note 
 @note_routes.route('/<int:id>', methods=["PUT"])
-def get_note(id):
-    note = Notes.query.filter_by(id=id).one()
+def edit_note(id):
+    form = NotesForm()
+    form['csrf_token'].data = request.cookies.get('csrf_token')
+    form.name.data = request.json.get('name')
+    form.content.data = request.json.get('content')
 
-    data = request.get_json()
-    title = data.get("title")
-    content = data.get("content")
+    if form.validate():
+        note = Notes.query.get(id)
+        if note is None:
+            return {"error": "Note not found"}, 404
 
-    if title is not None
-        note.title = title
-    if content is not None
-        note.content = content
+        if note.user_id != current_user.id:
+            return {"error": "Unauthorized"}, 403
 
-    db.session.commit()
-    
-    return {note: note.to_dict()}, 200
+        note.title = form.name.data
+        note.content = form.content.data
+
+        db.session.commit()
+        return {"note": note.to_dict()}, 200
+
+    return {"errors": form.errors}, 400
     
 
 # Delete a note 
