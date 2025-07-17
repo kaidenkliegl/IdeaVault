@@ -19,8 +19,10 @@ def seed():
         # Make sure to add all your other model's undo functions below
         undo_users()
         undo_notes()
+        undo_tags()
     seed_users()
     seed_notes()
+    seed_tags()
     # Add other seed functions here
 
 
@@ -28,4 +30,6 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     undo_users()
+    undo_notes()
+    undo_tags()
     # Add other undo functions here

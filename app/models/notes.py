@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from .notes_tags import note_tags
 
 
 # notes modal
@@ -34,7 +35,7 @@ class Notes(db.Model):
 
     notebook = db.relationship('Notebook', back_populates='notes')
     tasks = db.relationship('Tasks', back_populates='note', cascade='all, delete-orphan')
-    tags = db.relationship('Tag', secondary='note_tags', back_populates='notes')
+    tags = db.relationship('Tag', secondary=note_tags, back_populates='notes')
 
 
 
