@@ -3,12 +3,12 @@ from sqlalchemy.sql import text
 
 
 def seed_notes():
-    note1 = Note(
+    note1 = User( 
        notebook_id=1, title="", content="")
-    note2 = Note(
-        notebook_id=3, title="", content=""))
-    note3 = Note(
-        notebook_id=3, title="", content=""))
+    note2 = User(
+        notebook_id=3, title="", content="")
+    note3 = User(
+        notebook_id=3, title="", content="")
 
     db.session.add(note1)
     db.session.add(note2)
@@ -16,10 +16,9 @@ def seed_notes():
     db.session.commit()
 
 
-    def undo_notes():
+def undo_notes():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM notes"))
-        
+        db.session.execute(text("DELETE FROM users"))
     db.session.commit()
