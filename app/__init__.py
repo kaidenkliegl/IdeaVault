@@ -10,13 +10,11 @@ from .api.auth_routes import auth_routes
 from .seeds import seed_commands
 from .config import Config
 from .api.notebook_routes import notebook_routes
-from .api.tasks_routes import task_routes
+from .api.tasks_routes import tasks_routes
+from .api.notes_routes import notes_routes
 
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
-
-app.register_blueprint(notebook_routes, url_prefix='/api/notebooks')
-app.register_blueprint(task_routes, url_prefix='/api/tasks')
 
 print("Dunder Name:", __name__)
 
@@ -36,7 +34,9 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
-app.register_blueprint(auth_routes, url_prefix='/api/notes')
+app.register_blueprint(notes_routes, url_prefix='/api/notes')
+app.register_blueprint(notebook_routes, url_prefix='/api/notebooks')
+app.register_blueprint(tasks_routes, url_prefix='/api/tasks')
 db.init_app(app)
 Migrate(app, db)
 

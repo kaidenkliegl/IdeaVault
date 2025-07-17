@@ -10,7 +10,7 @@ notes_routes = Blueprint('notes', __name__)
 @login_required
 def notes(notebook_id):
     notes = Notes.query.filter_by(notebook_id = notebook_id).all()
-    return {notes: [notes.to_dict() for note in notes]}
+    return {"notes": [notes.to_dict() for note in notes]}
 
 
 #create new note in a notebook
@@ -19,7 +19,7 @@ def notes(notebook_id):
 def new_note(notebook_id):
     data = request.get_json()
     title = data.get("title")
-    content = content.get("content")
+    content = data.get("content")
 
     new_note = Notes(
         notebook_id = notebook_id,
@@ -27,29 +27,29 @@ def new_note(notebook_id):
         content = content
     )
 
-    db.session.create(new_note)
+    db.session.add(new_note)
     db.session.commit()
 
     return {'note': new_note.to_dict()}, 201
 
 #get a single note by id. Including the associated tags and tasks.
-@note_routes.route('/<int:id>', methods=["GET"])
+@notes_routes.route('/<int:id>', methods=["GET"])
 def get_note(id):
     note = Notes.query.filter_by(id = id).one()
     return {"note": note.to_dict()}
     
 #edit a note 
-@note_routes.route('/<int:id>', methods=["PUT"])
-def get_note(id):
+@notes_routes.route('/<int:id>', methods=["PUT"])
+def edit_note(id):
     note = Notes.query.filter_by(id=id).one()
 
     data = request.get_json()
     title = data.get("title")
     content = data.get("content")
 
-    if title is not None
+    if title is not None:
         note.title = title
-    if content is not None
+    if content is not None:
         note.content = content
 
     db.session.commit()
@@ -58,7 +58,7 @@ def get_note(id):
     
 
 # Delete a note 
-@note_routes.route('/<int:id>', methods=["DELETE"])
+@notes_routes.route('/<int:id>', methods=["DELETE"])
 def delete_note(id):
     note = Note.query.filter_by(id = id).one()
 

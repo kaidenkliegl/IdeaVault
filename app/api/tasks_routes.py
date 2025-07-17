@@ -1,24 +1,24 @@
 # app/api/tasks_routes.py
 
 from flask import Blueprint, request, jsonify
-from app.models import db, Task, Notes
+from app.models import db, Tasks, Notes
 from flask_login import login_required, current_user
-from ..forms.task_form import TaskForm
+from ..forms.tasks_form import TaskForm
 
-task_routes = Blueprint('tasks', __name__)
+tasks_routes = Blueprint('tasks', __name__)
 
 # This route will handle getting all tasks for the current user
-@task_routes.route('/', methods=['GET'])
+@tasks_routes.route('/', methods=['GET'])
 @login_required
 def get_tasks():
     """Get all tasks for the current user."""
     # Querys all tasks for the current user
-    tasks = Task.query.join(Notes).filter(Notes.user_id == current_user.id).all()
+    tasks = Tasks.query.join(Notes).filter(Notes.user_id == current_user.id).all()
      # This will convert to list of dictionaries
     return {'tasks': [task.to_dict() for task in tasks]}
 
 # Create a new task for a specific note
-@task_routes.route('/notes/<int:note_id>/tasks', methods=['POST'])
+@tasks_routes.route('/notes/<int:note_id>/tasks', methods=['POST'])
 @login_required
 def create_task(note_id):
     """Create a new task for a specific note."""
@@ -30,7 +30,7 @@ def create_task(note_id):
     if not content:
         return {'error': 'Content is required'}, 400
     # Creating a new task instance
-    new_task = Task(
+    new_task = Tasks(
         content=content,
         is_completed=False,
         note_id=note_id
@@ -44,12 +44,12 @@ def create_task(note_id):
     return {'task': new_task.to_dict()}, 201 
 
 # Updates a task by ID
-@task_routes.route('/<int:id>', methods=['PUT']) 
+@tasks_routes.route('/<int:id>', methods=['PUT']) 
 @login_required
 def update_task(id):
     """Update a task by ID."""
     # This will ensure the task exists
-    task = Task.query.get_or_404(id) 
+    task = Tasks.query.get_or_404(id) 
     # This will get the JSON data from the request
     data = request.get_json() 
     # Ensures content is provided
@@ -68,12 +68,12 @@ def update_task(id):
     return {'task': task.to_dict()}, 200
 
 # Delete a task by ID
-@task_routes.route('/<int:id>', methods=['DELETE'])
+@tasks_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_task(id):
     """Delete a task by ID."""
     # Ensures the task exists
-    task = Task.query.get_or_404(id)
+    task = Tasks.query.get_or_404(id)
     
     db.session.delete(task)
     db.session.commit()
