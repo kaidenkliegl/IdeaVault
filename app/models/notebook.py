@@ -17,7 +17,7 @@ class Notebook(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     user = db.relationship('User', back_populates='notebooks')
-    # notes = db.relationship('Note', back_populates='notebook', cascade='all, delete-orphan')
+    notes = db.relationship('Notes', back_populates='notebook', cascade='all, delete-orphan')
 
     def to_dict(self):
         return {
@@ -28,6 +28,6 @@ class Notebook(db.Model):
         }
 
         # for notes relationship later:
-        # data["notes"] = [note.to_dict() for note in self.notes] if self.notes else []
+        data["notes"] = [note.to_dict() for note in self.notes] if self.notes else []
 
         return data

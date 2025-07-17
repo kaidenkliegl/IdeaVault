@@ -34,7 +34,7 @@ class Notes(db.Model):
     # notes relationships
 
     notebook = db.relationship('Notebook', back_populates='notes')
-    tasks = db.relationship('Tasks', back_populates='note', cascade='all, delete-orphan')
+    # tasks = db.relationship('Tasks', back_populates='note', cascade='all, delete-orphan')
     tags = db.relationship('Tag', secondary=note_tags, back_populates='notes')
 
 
