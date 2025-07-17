@@ -27,8 +27,8 @@ class Task(db.Model):
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'updated_at': self.updated_at.isoformat() if self.updated_at else None,
         }
-    
-    return data
+        
+        return data
 
     #remember to add to notes model 
     # tasks = db.relationship('Task', back_populates='note', cascade='all, delete-orphan')
