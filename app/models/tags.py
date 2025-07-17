@@ -1,12 +1,6 @@
 from .db import db, environment, SCHEMA
 from datetime import datetime
-
-note_tags = db.Table(
-    'note_tags',
-    db.Model.metadata,
-    db.Column('note_id', db.Integer, db.ForeignKey('notes.id'), primary_key=True),
-    db.Column('tag_id', db.Integer, db.ForeignKey('tags.id'), primary_key=True)
-)
+from .notes_tags import note_tags
 
 class Tag(db.Model):
     __tablename__ = 'tags'
@@ -19,7 +13,7 @@ class Tag(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    notes = db.relationship( 'Note', secondary=note_tags, back_populates='tags' )
+    notes = db.relationship( 'Notes', secondary=note_tags, back_populates='tags' )
 
     def to_dict(self):
         return {

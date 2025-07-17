@@ -42,7 +42,7 @@ def new_note(notebook_id):
 
 
 #get a single note by id. Including the associated tags and tasks.
-@note_routes.route('/<int:id>', methods=["GET"])
+@notes_routes.route('/<int:id>', methods=["GET"])
 def get_note(id):
     note = Notes.query.filter_by(id = id).one()
     return {"note": note.to_dict()}
@@ -50,7 +50,7 @@ def get_note(id):
     
     
 #edit a note 
-@note_routes.route('/<int:id>', methods=["PUT"])
+@notes_routes.route('/<int:id>', methods=["PUT"])
 def edit_note(id):
     form = NotesForm()
     form['csrf_token'].data = request.cookies.get('csrf_token')
@@ -75,7 +75,7 @@ def edit_note(id):
     
 
 # Delete a note 
-@note_routes.route('/<int:id>', methods=["DELETE"])
+@notes_routes.route('/<int:id>', methods=["DELETE"])
 def delete_note(id):
     note = Note.query.filter_by(id = id).one()
 

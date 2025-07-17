@@ -1,4 +1,4 @@
-from app.models import db, Notes, environment, SCHEMA
+from app.models import db, Tags, environment, SCHEMA
 from sqlalchemy.sql import text
 
 def seed_notes():
