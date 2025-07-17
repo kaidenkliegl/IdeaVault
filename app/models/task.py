@@ -3,6 +3,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
+# This class will show the tasks that a user has created within a note
 class Task(db.Model):
     __tablename__ = 'tasks'
 
@@ -16,7 +17,7 @@ class Task(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    note = db.relationship('Note', back_populates='tasks')
+    note = db.relationship('Notes', back_populates='tasks')
 
     def to_dict(self):
         return {
@@ -28,7 +29,5 @@ class Task(db.Model):
             'updated_at': self.updated_at.isoformat() if self.updated_at else None,
         }
         
-        return data
-
     #remember to add to notes model 
     # tasks = db.relationship('Task', back_populates='note', cascade='all, delete-orphan')
