@@ -10,11 +10,13 @@ class Tag(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey(users.id), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     notes = db.relationship( 'Notes', secondary=note_tags, back_populates='tags' )
-
+    users = db.relationship('Users', back_populates='tags')
+    
     def to_dict(self):
         return {
             'id': self.id,
@@ -22,3 +24,4 @@ class Tag(db.Model):
             'createdAt': self.created_at,
             'updatedAt': self.updated_at
         }
+

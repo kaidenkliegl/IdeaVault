@@ -2,7 +2,6 @@ from app.models import db, Notes, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
-# Adds a note to notebook
 def seed_notes():
     note1 = User(
        notebook_id=1, title="Meeting notes", content="Try to motivate the workers. Discuss the tardiness.")
@@ -21,6 +20,6 @@ def undo_notes():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM users"))
+        db.session.execute(text("DELETE FROM notes"))
         
     db.session.commit()
