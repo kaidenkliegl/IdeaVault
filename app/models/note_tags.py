@@ -1,6 +1,4 @@
 
-
-
 class Note_tags():
     __tablename__ = "note_tags"
 
