@@ -1,6 +1,6 @@
 # app/seeds/notebooks.py
 
-from app.models import db, Notebook, User
+from app.models import db, Notebook, User, environment, SCHEMA
 from sqlalchemy.sql import text
 
 # This function will seed the notebooks table
@@ -19,7 +19,7 @@ def seed_notebooks():
 # so you can reseed data or run tests that expect an empty table.
 def undo_notebooks():
     if environment == "production":
-            db.session.execute(f"TRUNCATE table {SHEMA}.notebooks RESTART IDENTITY CASCADE;")
-        else:
-            db.session.execute(text("DELETE FROM notebooks"))
+        db.session.execute(f"TRUNCATE table {SHEMA}.notebooks RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM notebooks"))
     db.session.commit()
