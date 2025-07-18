@@ -21,6 +21,7 @@ def notes(notebook_id):
     return {"notes": [note.to_dict() for note in notes]}
 
 
+
 #create new note in a notebook
 @notes_routes.route('/notebook/<int:notebook_id>/notes', methods=['POST'])
 @login_required
