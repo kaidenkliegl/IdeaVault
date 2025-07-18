@@ -1,7 +1,7 @@
 # app/api/tasks_routes.py
 
 from flask import Blueprint, request, jsonify
-from app.models import db, Tasks, Notes
+from app.models import db, Task, Notes
 from flask_login import login_required, current_user
 from ..forms.tasks_form import TaskForm
 
@@ -13,7 +13,7 @@ tasks_routes = Blueprint('tasks', __name__)
 def get_tasks():
     """Get all tasks for the current user."""
     # Querys all tasks for the current user
-    tasks = Tasks.query.join(Notes).filter(Notes.user_id == current_user.id).all()
+    tasks = Task.query.join(Notes).filter(Notes.user_id == current_user.id).all()
      # This will convert to list of dictionaries
     return {'tasks': [task.to_dict() for task in tasks]}
 
@@ -30,7 +30,7 @@ def create_task(note_id):
     if not content:
         return {'error': 'Content is required'}, 400
     # Creating a new task instance
-    new_task = Tasks(
+    new_task = Task(
         content=content,
         is_completed=False,
         note_id=note_id
@@ -49,7 +49,7 @@ def create_task(note_id):
 def update_task(id):
     """Update a task by ID."""
     # This will ensure the task exists
-    task = Tasks.query.get_or_404(id) 
+    task = Task.query.get_or_404(id) 
     # This will get the JSON data from the request
     data = request.get_json() 
     # Ensures content is provided
@@ -73,7 +73,7 @@ def update_task(id):
 def delete_task(id):
     """Delete a task by ID."""
     # Ensures the task exists
-    task = Tasks.query.get_or_404(id)
+    task = Task.query.get_or_404(id)
     
     db.session.delete(task)
     db.session.commit()

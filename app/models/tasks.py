@@ -4,7 +4,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
 # This class will show the tasks that a user has created within a note
-class Tasks(db.Model):
+class Task(db.Model):
     __tablename__ = 'tasks'
 
     if environment == "production":
