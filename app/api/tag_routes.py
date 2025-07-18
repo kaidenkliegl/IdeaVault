@@ -20,7 +20,12 @@ def create_new_tag():
     form['csrf_token'].data = request.cookies.get('csrf_token')
     form.name.data = request.json.get('name')
 
-    if form.validate():
+    if form.validate_on_submit():
+         #check if tag name exist for this user
+        existing_tag = Tag.query.filter_by(user_id=current_user.id, name=form.name.data).first()
+        if existing_tag:
+            return jsonify({'error': 'Tag name already exists.'}), 400
+
         new_tag = Tag(
             name=form.name.data,
             user_id=current_user.id
@@ -72,3 +77,5 @@ def delete_tag(tag_id):
     db.session.commit()
 
     return {"message": "Tag deleted successfully."}, 200
+
+

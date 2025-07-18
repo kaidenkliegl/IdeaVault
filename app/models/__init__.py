@@ -9,3 +9,4 @@ from .notebook import Notebook
 from .tasks import Tasks
 # This import is for the notes model
 from .notes import Notes
+from .notes_tags import NoteTag
