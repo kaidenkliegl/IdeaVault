@@ -29,5 +29,4 @@ class Tasks(db.Model):
             'updated_at': self.updated_at.isoformat() if self.updated_at else None,
         }
         
-    #remember to add to notes model 
-    # tasks = db.relationship('Task', back_populates='note', cascade='all, delete-orphan')
+   

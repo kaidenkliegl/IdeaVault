@@ -55,7 +55,9 @@ def new_note(notebook_id):
 @notes_routes.route('/<int:id>', methods=["GET"])
 @login_required
 def get_note(id):
+    # query for a note by id
     note = Notes.query.filter_by(id=id).one_or_none()
+    # check if a note exists and if the user owns the note
     if note is None or note.notebook.user_id != current_user.id:
         return {"error": "Note not found"}, 404
     return {"note": note.to_dict()}
@@ -71,11 +73,12 @@ def edit_note(id):
     form.title.data = request.json.get('title')
     form.content.data = request.json.get('content')
 
-    if form.validate():
+    if form.validate_on_submit():
         note = Notes.query.get(id)
+        #check if the note exists
         if note is None:
             return {"error": "Note not found"}, 404
-
+    #check if the user owns the note
         if note.notebook.user_id != current_user.id:
             return {"error": "Unauthorized"}, 403
 

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Tag
+from app.models import db, Tag, Notes
 from app.forms import TagForm
 
 tag_routes = Blueprint('tags', __name__)
@@ -79,3 +79,13 @@ def delete_tag(tag_id):
     return {"message": "Tag deleted successfully."}, 200
 
 
+# filter notes by a tag
+@tag_routes.route("/<int:tag_id>/notes", methods=["GET"])
+@login_required
+def get_notes_from_tag(tag_id):
+    tag = Tag.query.get(tag_id)
+    if not tag or tag.user_id != current_user.id:
+        return {"error": "Tag not found"}
+
+    notes = Notes.query.join(Notes.tags).filter(Tag.id == tag_id).all()
+    return jsonify({"notes": [note.to_dict() for note in notes]})
