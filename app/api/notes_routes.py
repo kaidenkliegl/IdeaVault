@@ -15,7 +15,7 @@ def notes(notebook_id):
 
 
 #create new note in a notebook
-@notes_routes.route('notebooks/<int:notebookId>/notes', methods=['POST'])
+@notes_routes.route('/notebooks/<int:notebookId>/notes', methods=['POST'])
 @login_required
 def new_note(notebook_id):
     form = NotesForm()
