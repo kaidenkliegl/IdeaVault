@@ -1,3 +1,5 @@
+import { SET_NOTE, SET_NOTES, CREATE_NOTE, DELETE_NOTE } from "./notesAction";
+
 const initialState = {
   session: {
     user: null,
@@ -20,7 +22,7 @@ const initialState = {
 
 const NotesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_NOTES:
+    case SET_NOTES: {
       const notesById = {};
       const notesIds = [];
       action.payload.forEach((note) => {
@@ -34,6 +36,7 @@ const NotesReducer = (state = initialState, action) => {
           allIds: notesIds,
         },
       };
+    }
 
     case SET_NOTE: {
       const note = action.payload;
@@ -67,15 +70,13 @@ const NotesReducer = (state = initialState, action) => {
       };
     }
 
-    case DELETE_NOTE:
+    case DELETE_NOTE: {
       const note = action.payload;
       const noteId = note.id;
 
       const remainingNotes = { ...state.notes.byId };
       delete remainingNotes[noteId];
-      const filteredIds = state.notes.allIds.filter((id) => {
-        return id !== noteId;
-      });
+      const filteredIds = state.notes.allIds.filter((id) => id !== noteId);
 
       return {
         ...state,
@@ -84,6 +85,10 @@ const NotesReducer = (state = initialState, action) => {
           allIds: filteredIds,
         },
       };
+    }
+
+    default:
+      return state;
   }
 };
 
