@@ -4,13 +4,22 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
-from .models import db, User
+from .models import db, User, Tag, Notes, NoteTag, Task
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+from .api.notes_routes import notes_routes
+from .api.tag_routes import tag_routes
+from .api.tagging_notes_routes import tagging_notes_routes
 from .seeds import seed_commands
 from .config import Config
+from .api.notebook_routes import notebook_routes
+from .api.tasks_routes import tasks_routes
+from .api.notes_routes import notes_routes
+
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
+
+print("Dunder Name:", __name__)
 
 # Setup login manager
 login = LoginManager(app)
@@ -28,6 +37,11 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(notes_routes, url_prefix='/api/notes')
+app.register_blueprint(notebook_routes, url_prefix='/api/notebooks')
+app.register_blueprint(tasks_routes, url_prefix='/api/tasks')
+app.register_blueprint(tag_routes, url_prefix='/api/tags')
+app.register_blueprint(tagging_notes_routes, url_prefix='/api/tagging_notes')
 db.init_app(app)
 Migrate(app, db)
 
