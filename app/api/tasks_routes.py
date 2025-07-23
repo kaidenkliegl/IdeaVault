@@ -1,7 +1,7 @@
 # app/api/tasks_routes.py
 
 from flask import Blueprint, request, jsonify
-from app.models import db, Task, Notes
+from app.models import db, Task, Notes, Notebook
 from flask_login import login_required, current_user
 from ..forms.tasks_form import TaskForm
 
@@ -13,7 +13,7 @@ tasks_routes = Blueprint('tasks', __name__)
 def get_tasks():
     """Get all tasks for the current user."""
     # Querys all tasks for the current user
-    tasks = Task.query.join(Notes).filter(Notes.user_id == current_user.id).all()
+    tasks = Task.query.join(Notes).filter(Notes.id == Task.note_id).join(Notebook).filter(Notebook.user_id == current_user.id).all()
      # This will convert to list of dictionaries
     return {'tasks': [task.to_dict() for task in tasks]}
 
