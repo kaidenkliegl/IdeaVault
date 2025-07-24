@@ -23,12 +23,8 @@ def add_tag_to_note(note_id, tag_id):
 
     # prevent duplicate associations
     if note in tag.notes:
-    # exists = NoteTag.query.filter_by(note_id=note_id,tag_id=tag_id).first()
-    # if exists:
         return jsonify({'error': 'Tag already added to note.'}), 400
 
-    # note_tag = NoteTag(note_id=note_id, tag_id=tag_id)
-    # db.session.add(note_tag)
     tag.notes.append(note)
     db.session.commit()
     return jsonify({'message': 'Tag added to note.'})
@@ -50,7 +46,7 @@ def remove_tag_from_note(note_id, tag_id):
     if note not in tag.notes:
         return  jsonify({'error': 'Tag not associated with note.'}), 404
     
-    tag.notes.remove(note)
+    .remove(note)
     db.session.commit()
     return jsonify({'message': 'Tag removed from note.'}) 
 

@@ -88,4 +88,4 @@ def get_notes_from_tag(tag_id):
         return {"error": "Tag not found"}
 
     notes = Notes.query.join(Notes.tags).filter(Tag.id == tag_id).all()
-    return jsonify({"notes": [note.to_dict() for note in notes]})
+    return {"notes": [note.to_dict() for note in notes]}
