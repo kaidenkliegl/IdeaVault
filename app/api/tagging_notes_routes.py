@@ -46,7 +46,7 @@ def remove_tag_from_note(note_id, tag_id):
     if note not in tag.notes:
         return  jsonify({'error': 'Tag not associated with note.'}), 404
     
-    .remove(note)
+    tag.notes.remove(note)
     db.session.commit()
     return jsonify({'message': 'Tag removed from note.'}) 
 
