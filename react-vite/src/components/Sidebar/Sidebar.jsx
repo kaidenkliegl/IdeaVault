@@ -1,4 +1,4 @@
-// // react-vite/src/compenets/Sidebar.jsx
+// // react-vite/src/components/Sidebar.jsx
 
 // // This is a sidebar to match the wireframes
 // import { NavLink } from "react-router-dom"
