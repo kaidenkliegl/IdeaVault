@@ -1,25 +1,27 @@
-
 """initial schema
 
-Revision ID: 55b6e9fff88f
+Revision ID: c10270ca0619
 Revises: 
-Create Date: 2025-07-23 19:11:19.664950
+Create Date: 2025-07-23 19:31:52.322252
 
 """
-revision = '55b6e9fff88f'
+from alembic import op
+import sqlalchemy as sa
+
+# Define your schema name here
+SCHEMA = "ideavault_schema"
+
+
+# revision identifiers, used by Alembic.
+revision = 'c10270ca0619'
 down_revision = None
 branch_labels = None
 depends_on = None
 
-from alembic import op
-import sqlalchemy as sa
-from app.models.db import SCHEMA, environment
 
 def upgrade():
-    schema = SCHEMA if environment == "production" else None
-
-    if environment == "production":
-        op.execute(f"CREATE SCHEMA IF NOT EXISTS {SCHEMA};")
+    # Create schema if it doesn't exist
+    op.execute(f"CREATE SCHEMA IF NOT EXISTS {SCHEMA};")
 
     op.create_table('users',
         sa.Column('id', sa.Integer(), nullable=False),
@@ -29,31 +31,28 @@ def upgrade():
         sa.PrimaryKeyConstraint('id'),
         sa.UniqueConstraint('email'),
         sa.UniqueConstraint('username'),
-        schema=schema
+        schema=SCHEMA
     )
-
     op.create_table('notebooks',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('name', sa.String(length=100), nullable=False),
         sa.Column('user_id', sa.Integer(), nullable=False),
         sa.Column('created_at', sa.DateTime(), nullable=True),
         sa.Column('updated_at', sa.DateTime(), nullable=True),
-        sa.ForeignKeyConstraint(['user_id'], [f"{schema}.users.id"] if schema else ['users.id']),
+        sa.ForeignKeyConstraint(['user_id'], [f'{SCHEMA}.users.id']),
         sa.PrimaryKeyConstraint('id'),
-        schema=schema
+        schema=SCHEMA
     )
-
     op.create_table('tags',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('name', sa.String(length=50), nullable=False),
         sa.Column('user_id', sa.Integer(), nullable=False),
         sa.Column('created_at', sa.DateTime(), nullable=True),
         sa.Column('updated_at', sa.DateTime(), nullable=True),
-        sa.ForeignKeyConstraint(['user_id'], [f"{schema}.users.id"] if schema else ['users.id']),
+        sa.ForeignKeyConstraint(['user_id'], [f'{SCHEMA}.users.id']),
         sa.PrimaryKeyConstraint('id'),
-        schema=schema
+        schema=SCHEMA
     )
-
     op.create_table('notes',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('notebook_id', sa.Integer(), nullable=False),
@@ -61,20 +60,18 @@ def upgrade():
         sa.Column('content', sa.Text(), nullable=True),
         sa.Column('created_at', sa.DateTime(), nullable=True),
         sa.Column('updated_at', sa.DateTime(), nullable=True),
-        sa.ForeignKeyConstraint(['notebook_id'], [f"{schema}.notebooks.id"] if schema else ['notebooks.id']),
+        sa.ForeignKeyConstraint(['notebook_id'], [f'{SCHEMA}.notebooks.id']),
         sa.PrimaryKeyConstraint('id'),
-        schema=schema
+        schema=SCHEMA
     )
-
     op.create_table('note_tags',
         sa.Column('note_id', sa.Integer(), nullable=False),
         sa.Column('tag_id', sa.Integer(), nullable=False),
-        sa.ForeignKeyConstraint(['note_id'], [f"{schema}.notes.id"] if schema else ['notes.id']),
-        sa.ForeignKeyConstraint(['tag_id'], [f"{schema}.tags.id"] if schema else ['tags.id']),
+        sa.ForeignKeyConstraint(['note_id'], [f'{SCHEMA}.notes.id']),
+        sa.ForeignKeyConstraint(['tag_id'], [f'{SCHEMA}.tags.id']),
         sa.PrimaryKeyConstraint('note_id', 'tag_id'),
-        schema=schema
+        schema=SCHEMA
     )
-
     op.create_table('tasks',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('content', sa.String(length=255), nullable=False),
@@ -82,25 +79,16 @@ def upgrade():
         sa.Column('note_id', sa.Integer(), nullable=False),
         sa.Column('created_at', sa.DateTime(), nullable=True),
         sa.Column('updated_at', sa.DateTime(), nullable=True),
-        sa.ForeignKeyConstraint(['note_id'], [f"{schema}.notes.id"] if schema else ['notes.id']),
+        sa.ForeignKeyConstraint(['note_id'], [f'{SCHEMA}.notes.id']),
         sa.PrimaryKeyConstraint('id'),
-        schema=schema
+        schema=SCHEMA
     )
-
-    # ### end Alembic commands ###
 
 
 def downgrade():
-    schema = SCHEMA if environment == "production" else None
-
-    op.drop_table('tasks', schema=schema)
-    op.drop_table('note_tags', schema=schema)
-    op.drop_table('notes', schema=schema)
-    op.drop_table('tags', schema=schema)
-    op.drop_table('notebooks', schema=schema)
-    op.drop_table('users', schema=schema)
-
-    if environment == "production":
-        op.execute(f"DROP SCHEMA IF EXISTS {SCHEMA} CASCADE;")
-
-    # ### end Alembic commands ###
+    op.drop_table('tasks', schema=SCHEMA)
+    op.drop_table('note_tags', schema=SCHEMA)
+    op.drop_table('notes', schema=SCHEMA)
+    op.drop_table('tags', schema=SCHEMA)
+    op.drop_table('notebooks', schema=SCHEMA)
+    op.drop_table('users', schema=SCHEMA)
