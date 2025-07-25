@@ -21,8 +21,8 @@ class User(db.Model, UserMixin):
         cascade='all, delete-orphan'
     )
 
-    # #Relationship with Tags 
-    # tags = db.relationship('Tag', back_populates='user')
+    #Relationship with Tags 
+    tags = db.relationship('Tag', back_populates='user')
 
     @property
     def password(self):
