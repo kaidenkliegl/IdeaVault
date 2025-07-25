@@ -1,16 +1,20 @@
-"""second
+"""initial schema
 
-Revision ID: 5c9c9b053b55
+Revision ID: 10c17fafee31
 Revises: 
-Create Date: 2025-07-21 20:12:41.302804
+Create Date: 2025-07-24 19:35:39.748421
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
+
 
 # revision identifiers, used by Alembic.
-revision = '5c9c9b053b55'
+revision = '10c17fafee31'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -73,6 +77,16 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE notebooks SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE tags SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE notes SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE note_tags SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE tasks SET SCHEMA {SCHEMA};")
+
+
 
 
 def downgrade():

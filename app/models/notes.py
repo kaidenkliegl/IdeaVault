@@ -12,7 +12,7 @@ class Notes(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id=db.Column(db.Integer, primary_key=True)
-    notebook_id=db.Column(db.Integer, db.ForeignKey('notebooks.id'), nullable=False )
+    notebook_id=db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('notebooks.id')), nullable=False )
     title=db.Column(db.String(50), nullable=False)
     content=db.Column(db.Text, nullable=True )
     created_at = db.Column(db.DateTime, default=datetime.utcnow)

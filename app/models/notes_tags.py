@@ -8,5 +8,5 @@ NoteTag = db.Table(
 )
 
 if environment == "production":
-    note_tags.schema = SCHEMA
+    NoteTag.schema = SCHEMA
     
