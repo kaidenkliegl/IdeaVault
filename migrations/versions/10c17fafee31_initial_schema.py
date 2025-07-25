@@ -43,10 +43,10 @@ def upgrade():
     op.create_table('tags',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
+    # sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    # sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('notes',
