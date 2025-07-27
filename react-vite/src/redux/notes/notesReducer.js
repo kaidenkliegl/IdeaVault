@@ -1,23 +1,8 @@
 import { SET_NOTE, SET_NOTES, CREATE_NOTE, DELETE_NOTE } from "./notesAction";
 
 const initialState = {
-  session: {
-    user: null,
-  },
-  notebooks: {
-    byId: {},
-    allIds: [],
-  },
-  notes: {
-    byId: {},
-    allIds: [],
-  },
-  selectedNote: null,
-
-  tasks: {
-    byId: {},
-    allIds: [],
-  },
+  byId: {},
+  allIds: [],
 };
 
 const NotesReducer = (state = initialState, action) => {
@@ -31,10 +16,8 @@ const NotesReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        notes: {
-          byId: notesById,
-          allIds: notesIds,
-        },
+        byId: notesById,
+        allIds: notesIds,
       };
     }
 
@@ -43,15 +26,13 @@ const NotesReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        notes: {
-          byId: {
-            ...state.notes.byId,
-            [note.id]: note,
-          },
-          allIds: state.notes.allIds.includes(note.id)
-            ? state.notes.allIds
-            : [...state.notes.allIds, note.id],
+        byId: {
+          ...state.byId,
+          [note.id]: note,
         },
+        allIds: state.allIds.includes(note.id)
+          ? state.allIds
+          : [...state.allIds, note.id],
       };
     }
 
@@ -60,35 +41,30 @@ const NotesReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        notes: {
-          byId: {
-            ...state.notes.byId,
-            [note.id]: note,
-          },
-          allIds: [...state.notes.allIds, note.id],
+        byId: {
+          ...state.byId,
+          [note.id]: note,
         },
+        allIds: [...state.allIds, note.id],
       };
     }
 
     case DELETE_NOTE: {
-      const note = action.payload;
-      const noteId = note.id;
+   
+      const noteId = action.payload;
 
-      const remainingNotes = { ...state.notes.byId };
+      const remainingNotes = { ...state.byId };
       delete remainingNotes[noteId];
-      const filteredIds = state.notes.allIds.filter((id) => id !== noteId);
+      const filteredIds = state.allIds.filter((id) => id !== noteId);
 
       return {
         ...state,
-        notes: {
-          byId: remainingNotes,
-          allIds: filteredIds,
-        },
+        byId: remainingNotes,
+        allIds: filteredIds,
       };
     }
-
     default:
-      return state;
+        return state
   }
 };
 

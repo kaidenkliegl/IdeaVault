@@ -4,6 +4,9 @@ import SignupFormPage from '../components/SignupFormPage';
 import NotebookDetails from '../components/Notebooks/NotebookDetails';
 import NotebookForm from '../components/Notebooks/NotebookForm';
 import NotebookList from '../components/Notebooks/NotebookList';
+import NotesList from '../components/NotesPage/NotesList';
+import NoteDetail from '../components/NotesPage/NoteDetail';
+import NoteForm from '../components/NotesPage/NoteForm';
 
 import Layout from './Layout';
 
@@ -38,7 +41,20 @@ export const router = createBrowserRouter([
       {
         path: "notebooks/:notebookId",
         element: <NotebookDetails/>
+      },
+      {
+        path: "notebook/:notebookId/notes",
+        element: <NotesList />,
+      },
+      {
+        path: "notes/:noteId",
+        element: <NoteDetail />,
+      }, 
+      {
+        path: "notebook/:notebookId/notes/new",
+        element: <NoteForm />,
       }
+      
     ],
   },
 ]);

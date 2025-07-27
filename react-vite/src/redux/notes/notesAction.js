@@ -4,6 +4,7 @@ export const SET_NOTES = "notes/setNotes";
 export const SET_NOTE = "notes/setNote";         
 export const CREATE_NOTE = "notes/createNote";   
 export const DELETE_NOTE = "notes/deleteNote"; 
+export const EDIT_NOTE = "notes/editNote"
 
 // action creators 
 
@@ -21,19 +22,25 @@ export const setNote = (note) => {
     };
 }
 
-export const createNote = (note) => {
+export const newNote = (note) => {
     return {
         type: CREATE_NOTE,
         payload: note
     };
 }
 
-export const deleteNote = (noteId) => {
+export const removeNote = (noteId) => {
     return {
         type: DELETE_NOTE,
         payload: noteId
     };
 }
 
+export const editNote = (note) => {
+    return {
+        type: EDIT_NOTE,
+        payload: note
+    };
+}
 
 
