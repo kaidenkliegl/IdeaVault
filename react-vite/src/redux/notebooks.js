@@ -131,7 +131,7 @@ function notebooksReducer(state = initialState, action) {
     }
 
     // This case will handle the action to add a new notebook
-    case ADD_NOTEBOOK:
+    case ADD_NOTEBOOK: 
     // This case will handle the action to update an existing notebook
     case UPDATE_NOTEBOOK: 
         // Returns a new state with the notebook added or updated
