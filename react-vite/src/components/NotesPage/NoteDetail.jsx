@@ -1,7 +1,27 @@
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { retrieveNote, deleteNote, updateNote } from "../../redux/notes/notesThunks";
+
+// Extended toolbar (similar to Google Docs but stable)
+const modules = {
+  toolbar: [
+    [{ font: [] }],  // font family
+    [{ size: ["small", false, "large", "huge"] }], // font size
+    ["bold", "italic", "underline", "strike"], // basic formatting
+    [{ color: [] }, { background: [] }], // text/background color
+    [{ script: "sub" }, { script: "super" }], // subscript/superscript
+    [{ header: 1 }, { header: 2 }], // headers
+    ["blockquote", "code-block"], // block elements
+    [{ list: "ordered" }, { list: "bullet" }], // lists
+    [{ indent: "-1" }, { indent: "+1" }], // indentation
+    [{ align: [] }], // alignment
+    ["link", "image", "video"], // media
+    ["clean"], // remove formatting
+  ],
+};
 
 function NoteDetail() {
   const { noteId } = useParams();
@@ -14,9 +34,8 @@ function NoteDetail() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
-  const hasInitialized = useRef(false); // prevents overwriting user input
+  const hasInitialized = useRef(false);
 
-  // Load the note initially
   useEffect(() => {
     if (!note) {
       dispatch(retrieveNote(note_id));
@@ -27,7 +46,6 @@ function NoteDetail() {
     }
   }, [dispatch, note_id, note]);
 
-  // Auto-save when user stops typing
   useEffect(() => {
     if (!note) return;
 
@@ -65,10 +83,13 @@ function NoteDetail() {
         )}
       </div>
 
-      <textarea
+      <ReactQuill
+        theme="snow"
         value={content}
-        onChange={(e) => setContent(e.target.value)}
+        onChange={setContent}
         placeholder="Write your note..."
+        modules={modules}
+        style={{ minHeight: "300px", marginBottom: "20px" }}
       />
 
       <button onClick={handleDelete}>Delete Note</button>
