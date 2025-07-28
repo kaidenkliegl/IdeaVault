@@ -1,4 +1,3 @@
-import React from "react";
 import "./NoteItem.css"; 
 
 export default function NoteItem({ note }) {

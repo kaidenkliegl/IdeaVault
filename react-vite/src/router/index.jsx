@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: "/home",
         element: <h1>Welcome To IdeaVault!</h1>,
       },
       {
