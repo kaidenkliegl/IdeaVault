@@ -26,6 +26,11 @@ function TaskList() {
             is_completed: !task.iscompleted
         }));
     };
+    
+    const handleDelete = async (taskId) => {
+        await dispatch(thunkDeleteTask(taskId))
+    };
+
 
     return (
         <div className='task-list-container'>

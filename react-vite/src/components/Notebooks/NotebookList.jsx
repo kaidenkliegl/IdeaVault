@@ -8,6 +8,8 @@ import './NotebookList.css';
 
 // This is the NotebookList function
 function NotebookList() {
+    console.log("NotebookList.jsx: THIS IS THE REAL ONE!");
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     // Thisd will extract notebooks from Redux state as an array
@@ -29,6 +31,7 @@ function NotebookList() {
         <div className='notebook-list-container'>
             {/* Page Title */}
             <h1>Your Notebooks</h1>
+            
             {/* Navigate to new notebook form */}
             <button onClick={() => navigate('/notebooks/new')} className="notebook-create-button">
                 New Notebook

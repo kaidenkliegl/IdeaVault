@@ -7,7 +7,8 @@ import NotebookList from '../components/Notebooks/NotebookList';
 import NotesList from '../components/NotesPage/NotesList';
 import NoteDetail from '../components/NotesPage/NoteDetail';
 import NoteForm from '../components/NotesPage/NoteForm';
-
+import TaskList from '../components/Tasks/TaskList';
+import TaskForm from '../components/Tasks/TaskForm';
 import Layout from './Layout';
 
 export const router = createBrowserRouter([
@@ -16,7 +17,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element: <h1>Welcome To IdeaVault!</h1>,
       },
       {
         path: "login",
@@ -53,8 +54,19 @@ export const router = createBrowserRouter([
       {
         path: "notebook/:notebookId/notes/new",
         element: <NoteForm />,
+      },
+      {
+        path: "tasks",
+        element: <TaskList />
+      },
+      {
+        path: "tasks/new",
+        element: <TaskForm />
+      },
+      {
+        path: "tasks/:taskId/edit",
+        element: <TaskForm />
       }
-      
     ],
   },
 ]);
