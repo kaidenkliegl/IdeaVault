@@ -10,7 +10,7 @@ import './NotebookList.css';
 function NotebookList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // Thisd will extract notebooks from Redux state as an array
+    // This will extract notebooks from Redux state as an array
     const notebooks = useSelector((state) => Object.values(state.notebooks));
 
 
@@ -40,6 +40,7 @@ function NotebookList() {
                         {/* Navigate to details view */}
                         <button onClick={() => navigate(`/notebooks/${notebook.id}`)} className="notebook-name-button">
                             {notebook.name}
+                            {console.log(notebook.name)}
                         </button>
                         {/* Action buttons */}
                         <div className="notebook-actions">
