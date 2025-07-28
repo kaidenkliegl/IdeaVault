@@ -1,21 +1,52 @@
-// // react-vite/src/components/Sidebar.jsx
+import { NavLink } from "react-router-dom";
+import "./sidebar.css";
 
-// // This is a sidebar to match the wireframes
-// import { NavLink } from "react-router-dom"
-// import "./sidebar.css"
+export default function Sidebar() {
+  return (
+    <div className="sidebar">
+      <nav>
+        <ul>
+          <li>
+            <div className="search-container">
+              <input
+                type="text"
+                className="search-input"
+                placeholder="Search..."
+              />
+            </div>
+          </li>
 
-// export default function Sidebar() {
-//     return (
-//         <div className="sidebar">
-//             <nav>
-//                 <ul>
-//                     <li><NavLink to="/">Home</NavLink></li>
-//                     <li><NavLink to="/notes">Notes</NavLink></li>
-//                     <li><NavLink to="/tasks">Tasks</NavLink></li>
-//                     <li><NavLink to="/notebooks">Notebooks</NavLink></li>
-//                     <li><NavLink to="/tags">Tags</NavLink></li>
-//                 </ul>
-//             </nav>
-//         </div>
-//     );
-// }
+          <li>
+            <NavLink className="create-btn" to="notebook/:notebookId/notes/new">+ Note</NavLink>
+          </li>
+          <li>
+            <NavLink className="create-btn" to="notebooks/new">+ Notebook</NavLink>
+          </li>
+          <li>
+            <NavLink className="create-btn" to="">+ Task</NavLink>
+          </li>
+          <li>
+            <NavLink className="create-btn" to="">+ Tag</NavLink>
+          </li>
+
+          {/* Regular navigation with its own class */}
+          <li>
+            <NavLink className="nav-btn" to="/home">Home</NavLink>
+          </li>
+          <li>
+            <NavLink className="nav-btn" to="notes/all">Notes</NavLink>
+          </li>
+          <li>
+            <NavLink className="nav-btn" to="tasks">Tasks</NavLink>
+          </li>
+          <li>
+            <NavLink className="nav-btn" to="notebooks">Notebooks</NavLink>
+          </li>
+          <li>
+            <NavLink className="nav-btn" to="tags">Tags</NavLink>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  );
+}

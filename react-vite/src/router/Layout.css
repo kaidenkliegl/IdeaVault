@@ -1,0 +1,24 @@
+.app-layout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: calc(100vh - 60px); /* Account for Navigation height */
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #2C2C54;
+    color: #ECECEC;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+  }
+  
+  .main-content {
+    flex: 1;
+    background-color: #F7FAFC;
+    padding: 2rem;
+    overflow-y: auto;
+  }
+  

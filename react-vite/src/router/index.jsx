@@ -7,6 +7,8 @@ import NotebookList from '../components/Notebooks/NotebookList';
 import NotesList from '../components/NotesPage/NotesList';
 import NoteDetail from '../components/NotesPage/NoteDetail';
 import NoteForm from '../components/NotesPage/NoteForm';
+import AboutPage from '../components/AboutPage/About';
+import AllNotesList from '../components/NotesPage/UserNotes';
 
 import Layout from './Layout';
 
@@ -15,7 +17,7 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: "/home",
         element: <h1>Welcome!</h1>,
       },
       {
@@ -53,6 +55,14 @@ export const router = createBrowserRouter([
       {
         path: "notebook/:notebookId/notes/new",
         element: <NoteForm />,
+      },
+      {
+        path: "about",
+        element: <AboutPage />
+      },
+      {
+        path: "notes/all",
+        element: <AllNotesList />
       }
       
     ],
