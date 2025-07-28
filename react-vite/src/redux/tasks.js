@@ -24,21 +24,25 @@ const updateTask = (task) => ({
 
 const deleteTask = (taskId) => ({
     type: DELETE_TASK,
-    payload: task
+    payload: taskId
 })
 
 // These are going to be the thunbks for tasks
 export const thunkFetchTasks = () => async (dispatch) => {
     const res = await fetch('/api/tasks/');
     if (res.ok) {
-        const data = res.json();
+        const data = await res.json();
         dispatch(setTasks(data.tasks));
 
     }
 };
 
-export const thunkCreateTask = (noteId, taskdata) => async (dispatch) => {
-    const res = await fetch(`/api/tasks/notes/${noteId}/tasks`, {method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(taskData)})
+export const thunkCreateTask = (noteId, taskData) => async (dispatch) => {
+    const res = await fetch(`/api/tasks/notes/${noteId}/tasks`, 
+        {method: 'POST', 
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(taskData)
+    });
 
     if (res.ok) {
         const data = await res.json();
@@ -55,7 +59,11 @@ export const thunkCreateTask = (noteId, taskdata) => async (dispatch) => {
 };
 
 export const thunkUpdateTask = (taskId, taskData) => async (dispatch) => {
-    const res = await fetch(`api/tasks/${taskId}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(taskData)});
+    const res = await fetch(`/api/tasks/${taskId}`, 
+        { method: 'PUT', 
+            headers: { 'Content-Type': 'application/json' }, 
+            body: JSON.stringify(taskData)
+        });
 
     if (res.ok) {
         const data = await res.json();
@@ -97,7 +105,7 @@ function tasksReducer(state = initialState, action) {
             const newState = {};
             action.payload.forEach(task => {
                 newState[task.id] = task;
-            });
+            })
             return newState
 
         }
@@ -117,8 +125,8 @@ function tasksReducer(state = initialState, action) {
 
         default:
             return state
-    };
+    }
 
 }
 
-export default tasksReducer;
+export default tasksReducer

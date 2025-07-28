@@ -1,6 +1,6 @@
 // react-vite/src/components/Tasks/TaskList.jsx
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkFetchTasks, thunkUpdateTask, thunkDeleteTask } from '../../redux/tasks';
@@ -10,22 +10,31 @@ import './TaskList.css'
 function TaskList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     // This will sselect all tasks from the store
-    const tasks = useSelector((state) => Object.values(state.tasks));
+    const tasks = useSelector((state) => Object.values(state.tasks || {}));
 
     // This will fetch tasks
     useEffect(() => {
-        (thunkFetchTasks());
-
+        dispatch(thunkFetchTasks()).then(() => setLoading(false));;
+git 
     }, [dispatch]);
 
     // This will toggle the task completion
     const handleToggle = async (task) => {
         await dispatch(thunkUpdateTask(task.id, {
-            is_completed: !task.iscompleted
+            is_completed: !task.is_completed
         }));
     };
+    
+    const handleDelete = async (taskId) => {
+        await dispatch(thunkDeleteTask(taskId))
+    };
+
+    if (loading) return <p className="loading">Loading tasks...</p>;
+    if (!tasks.length) return <p className="loading">No tasks found.</p>;
+
 
     return (
         <div className='task-list-container'>

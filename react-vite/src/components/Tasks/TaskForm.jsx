@@ -75,7 +75,7 @@ function TaskForm() {
                     Content
                     <input
                         type='text'
-                        value={context}
+                        value={content}
                         onChange={(e) => setContent(e.target.value)}
                         required
                     />
