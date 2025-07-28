@@ -47,7 +47,9 @@ function NotebookList() {
   };
   return (
     <div className="notebook-page-div">
-      <h1>Your Notebooks</h1>
+      <div className="notebook-list-header">
+        <h2>Your Notebooks</h2>
+      </div>
 
       <button
         onClick={() => navigate("/notebooks/new")}

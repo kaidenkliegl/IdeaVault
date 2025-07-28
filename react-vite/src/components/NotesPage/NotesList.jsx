@@ -4,11 +4,14 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { retrieveNotes, deleteNote } from "../../redux/notes/notesThunks";
 import NoteItem from "./Note/NoteItem";
 
-function NotesList() {
+function NotesList({ notebookId: propNotebookId }) {
+    //if prop is pass in use it. Otherwise have the useParams as a fallback
+    // Doing this to use the component in different locations accessing notebookId different ways 
+  const { notebookId: paramNotebookId } = useParams();
+  const nbkId = Number(propNotebookId || paramNotebookId);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { notebookId } = useParams();
-  const nbkId = Number(notebookId);
 
   const notesById = useSelector((state) => state.notes.byId);
   const noteIds = useSelector((state) => state.notes.allIds);
@@ -28,7 +31,7 @@ function NotesList() {
   };
 
   return (
-    <div className="notes-list-container">
+    <div className="notes-list-container"     style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
       {notes.map((note) => (
         <Link key={note.id} to={`/notes/${note.id}`}>
           <NoteItem note={note} onDelete={handleDelete} />

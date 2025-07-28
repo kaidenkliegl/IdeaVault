@@ -3,7 +3,7 @@
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     padding: 1rem;
-    width: calc((100% - 2rem) / 3); /* 3 per row */
+    width: 30rem;
     box-sizing: border-box;
     cursor: pointer;
     display: flex;

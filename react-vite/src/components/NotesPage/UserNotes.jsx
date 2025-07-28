@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkFetchAllNotes, deleteNote } from "../../redux/notes/notesThunks";
 import NoteItem from "./Note/NoteItem";
+import "./UserNotes.css";
 
 function AllNotesList() {
   const dispatch = useDispatch();
@@ -21,20 +22,25 @@ function AllNotesList() {
   if (!notes.length) return <div>No notes yet.</div>;
 
   return (
-    <div className="all-notes-list">
-      <h2>All Notes</h2>
-      <ul>
-        {notes.map((note) => (
-          <Link
-            key={note.id}
-            to={`/notes/${note.id}`}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <NoteItem note={note} onDelete={handleDelete} />
-          </Link>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="all-notes-header">
+        <h2>All Notes</h2>
+      </div>
+
+      <div className="all-notes-list">
+        <ul>
+          {notes.map((note) => (
+            <Link
+              key={note.id}
+              to={`/notes/${note.id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <NoteItem note={note} onDelete={handleDelete} />
+            </Link>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }
 

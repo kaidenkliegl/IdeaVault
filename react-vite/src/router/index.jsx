@@ -11,6 +11,7 @@ import TaskList from '../components/Tasks/TaskList';
 import TaskForm from '../components/Tasks/TaskForm';
 import AboutPage from '../components/AboutPage/About';
 import AllNotesList from '../components/NotesPage/UserNotes';
+import SelectNotebook from '../components/Notebooks/SelectNotebook';
 
 import Layout from './Layout';
 
@@ -77,6 +78,10 @@ export const router = createBrowserRouter([
       {
         path: "notes/all",
         element: <AllNotesList />
+      },
+      {
+        path:"notebook/select", 
+        element: <SelectNotebook />
       }
     ],
   },
