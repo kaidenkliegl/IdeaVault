@@ -1,1 +1,73 @@
-/* react-vite/src/components/Tasks/TaskForm.css*/
+.task-form-container {
+    max-width: 480px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(44, 44, 84, 0.15); /* soft shadow with dark indigo tint */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .task-form-container h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #2C2C54;
+  }
+  
+  .task-form p {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    color: #474787; 
+  }
+  
+  .task-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #2C2C54;
+  }
+  
+  .task-form input[type="text"] {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #AAABB8; 
+    border-radius: 8px;
+    transition: border-color 0.25s ease;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    background-color: white;
+    color: #2C2C54;
+  }
+  
+  .task-form input[type="text"]:focus {
+    outline: none;
+    border-color: #474787; 
+    box-shadow: 0 0 6px rgba(71, 71, 135, 0.3);
+  }
+  
+  .error-text {
+    color: #d93025; /* keep red for errors */
+    font-size: 0.9rem;
+    margin-top: -0.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .submit-task-button {
+    width: 100%;
+   background-color: #474787;; 
+    border: none;
+    color: white;
+    padding: 0.75rem 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-task-button:hover {
+    background-color: #6C63FF;
+  }
+ 
+  

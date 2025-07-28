@@ -1,0 +1,22 @@
+.task-notes-grid{
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    row-gap: 20px;
+    column-gap: 25px;
+}
+
+.task-notes-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5vh;
+    padding: 0;
+}
+.task-notes-header h2{
+    font-size: 2.5em;
+}

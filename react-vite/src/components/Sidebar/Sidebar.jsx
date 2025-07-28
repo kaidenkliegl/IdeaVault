@@ -23,7 +23,7 @@ export default function Sidebar() {
             <NavLink className="create-btn" to="notebooks/new">+ Notebook</NavLink>
           </li>
           <li>
-            <NavLink className="create-btn" to="">+ Task</NavLink>
+            <NavLink className="create-btn" to="tasks/select">+ Task</NavLink>
           </li>
           <li>
             <NavLink className="create-btn" to="">+ Tag</NavLink>
