@@ -3,24 +3,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { retrieveNote, deleteNote, updateNote } from "../../redux/notes/notesThunks";
-import './NoteDetail.css'
+import {
+  retrieveNote,
+  deleteNote,
+  updateNote,
+} from "../../redux/notes/notesThunks";
+import NotesList from "./NotesList";
+import "./NoteDetail.css";
 
-// Extended toolbar (similar to Google Docs but stable)
 const modules = {
   toolbar: [
-    [{ font: [] }],  // font family
-    [{ size: ["small", false, "large", "huge"] }], // font size
-    ["bold", "italic", "underline", "strike"], // basic formatting
-    [{ color: [] }, { background: [] }], // text/background color
-    [{ script: "sub" }, { script: "super" }], // subscript/superscript
-    [{ header: 1 }, { header: 2 }], // headers
-    ["blockquote", "code-block"], // block elements
-    [{ list: "ordered" }, { list: "bullet" }], // lists
-    [{ indent: "-1" }, { indent: "+1" }], // indentation
-    [{ align: [] }], // alignment
-    ["link", "image", "video"], // media
-    ["clean"], // remove formatting
+    [{ font: [] }],
+    [{ size: ["small", false, "large", "huge"] }],
+    ["bold", "italic", "underline", "strike"],
+    [{ color: [] }, { background: [] }],
+    [{ script: "sub" }, { script: "super" }],
+    [{ header: 1 }, { header: 2 }],
+    ["blockquote", "code-block"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ indent: "-1" }, { indent: "+1" }],
+    [{ align: [] }],
+    ["link", "image", "video"],
+    ["clean"],
   ],
 };
 
@@ -67,35 +71,47 @@ function NoteDetail() {
   if (!note) return <div className="loading-message">Loading...</div>;
 
   return (
-    <div className="note-detail-container">
-      <div className="title-section">
-        {isEditingTitle ? (
-          <input
-            className="title-input"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            onBlur={() => setIsEditingTitle(false)}
-            autoFocus
-          />
-        ) : (
-          <>
-            <h3 className="note-title">{title}</h3>
-            <button className="edit-title-button" onClick={() => setIsEditingTitle(true)}>Edit Title</button>
-          </>
-        )}
+    <div className="notes-parent-container">
+      <div className="notes-sidebar">
+        <NotesList notebookId={note.notebook_id} />
       </div>
 
-      <ReactQuill
-        className="quill-editor"
-        theme="snow"
-        value={content}
-        onChange={setContent}
-        placeholder="Write your note..."
-        modules={modules}
-        style={{ minHeight: "300px", marginBottom: "20px" }}
-      />
+      <div className="note-detail-container">
+        <div className="title-section">
+          {isEditingTitle ? (
+            <input
+              className="title-input"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              onBlur={() => setIsEditingTitle(false)}
+              autoFocus
+            />
+          ) : (
+            <>
+              <h3 className="note-title">{title}</h3>
+              <button
+                className="edit-title-button"
+                onClick={() => setIsEditingTitle(true)}
+              >
+                Edit Title
+              </button>
+              <button className="delete-note-button" onClick={handleDelete}>
+                Delete Note
+              </button>
+            </>
+          )}
+        </div>
 
-      <button className="delete-note-button" onClick={handleDelete}>Delete Note</button>
+        <ReactQuill
+          className="quill-editor"
+          theme="snow"
+          value={content}
+          onChange={setContent}
+          placeholder="Write your note..."
+          modules={modules}
+          style={{ minHeight: "300px", marginBottom: "20px" }}
+        />
+      </div>
     </div>
   );
 }

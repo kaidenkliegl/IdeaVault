@@ -17,8 +17,8 @@ function TaskList() {
 
     // This will fetch tasks
     useEffect(() => {
-        dispatch(thunkFetchTasks()).then(() => setLoading(false));;
-git 
+        dispatch(thunkFetchTasks()).then(() => setLoading(false));
+
     }, [dispatch]);
 
     // This will toggle the task completion

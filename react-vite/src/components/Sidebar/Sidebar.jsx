@@ -17,7 +17,7 @@ export default function Sidebar() {
           </li>
 
           <li>
-            <NavLink className="create-btn" to="notebook/:notebookId/notes/new">+ Note</NavLink>
+            <NavLink className="create-btn" to="notebook/select">+ Note</NavLink>
           </li>
           <li>
             <NavLink className="create-btn" to="notebooks/new">+ Notebook</NavLink>
@@ -29,7 +29,7 @@ export default function Sidebar() {
             <NavLink className="create-btn" to="">+ Tag</NavLink>
           </li>
 
-          {/* Regular navigation with its own class */}
+          {/* Regular navigation */}
           <li>
             <NavLink className="nav-btn" to="/home">Home</NavLink>
           </li>

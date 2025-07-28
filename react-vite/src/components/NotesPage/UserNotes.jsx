@@ -1,7 +1,9 @@
-// src/components/Notes/AllNotesList.jsx
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkFetchAllNotes } from "../../redux/notes/notesThunks";
+import { thunkFetchAllNotes, deleteNote } from "../../redux/notes/notesThunks";
+import NoteItem from "./Note/NoteItem";
+import "./UserNotes.css";
 
 function AllNotesList() {
   const dispatch = useDispatch();
@@ -13,21 +15,32 @@ function AllNotesList() {
     dispatch(thunkFetchAllNotes());
   }, [dispatch]);
 
+  const handleDelete = async (id) => {
+    await dispatch(deleteNote(id));
+  };
+
   if (!notes.length) return <div>No notes yet.</div>;
 
   return (
-    <div className="all-notes-list">
-      <h2>All Notes</h2>
-      <ul>
-        {notes.map((note) => (
-          <li key={note.id}>
-            <h3>{note.title}</h3>
-            <p>{note.content.substring(0, 100)}...</p>
-            <small>{new Date(note.updated_at).toLocaleString()}</small>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="all-notes-header">
+        <h2>All Notes</h2>
+      </div>
+
+      <div className="all-notes-list">
+        <ul>
+          {notes.map((note) => (
+            <Link
+              key={note.id}
+              to={`/notes/${note.id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <NoteItem note={note} onDelete={handleDelete} />
+            </Link>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }
 
