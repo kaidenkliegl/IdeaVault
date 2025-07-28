@@ -39,7 +39,7 @@ export const thunkFetchNotebooks = () => async (dispatch) => {
         // it will get the data in JSON format
         const data = await res.json();
         // Dispatches the action to set the notebooks in the state
-        dispatch(setNotebooks(data)); 
+        dispatch(setNotebooks(data.notebooks)); 
     }
 
 };
@@ -57,7 +57,7 @@ export const thunkCreateNotebook = (notebookdata) => async (dispatch) => {
 
     if (res.ok) {
         const data = await res.json();
-        dispatch(addNotebook(data));
+        dispatch(addNotebook(data.notebook));
         // So it returns the created notebook data
         return data; 
         // If the response is not ok, it will get the error messages
@@ -81,7 +81,7 @@ export const thunkUpdateNotebook = (notebookId, notebookdata) => async (dispatch
 
     if (res.ok) { 
         const data = await res.json();
-        dispatch(updateNotebook(data));
+        dispatch(updateNotebook(data.notebook));
         return data;
     } else if (res.status < 500) {
         const data = await res.json();
@@ -131,8 +131,8 @@ function notebooksReducer(state = initialState, action) {
     }
 
     // This case will handle the action to add a new notebook
-    case ADD_NOTEBOOK: 
-    // This case will handle the action to update an existing notebook
+    case ADD_NOTEBOOK:
+    // falls through
     case UPDATE_NOTEBOOK: 
         // Returns a new state with the notebook added or updated
         return { 
