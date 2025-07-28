@@ -12,6 +12,7 @@ import TaskForm from '../components/Tasks/TaskForm';
 import AboutPage from '../components/AboutPage/About';
 import AllNotesList from '../components/NotesPage/UserNotes';
 import SelectNotebook from '../components/Notebooks/SelectNotebook';
+import TaskNotes from '../components/Tasks/TasksNotes';
 
 import Layout from './Layout';
 
@@ -64,7 +65,11 @@ export const router = createBrowserRouter([
         element: <TaskList />
       },
       {
-        path: "tasks/new",
+        path: "tasks/select",
+        element:<TaskNotes />
+      },
+      {
+        path: "tasks/new/:taskNoteId",
         element: <TaskForm />
       },
       {
