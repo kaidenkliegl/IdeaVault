@@ -29,7 +29,7 @@ export default function Sidebar() {
             <NavLink className="create-btn" to="">+ Tag</NavLink>
           </li>
 
-          {/* Regular navigation with its own class */}
+          {/* Regular navigation */}
           <li>
             <NavLink className="nav-btn" to="/home">Home</NavLink>
           </li>
