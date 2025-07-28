@@ -8,11 +8,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import NotesReducer from "./notes/notesReducer";
 import notebooksReducer from "./notebooks";
+import tasksReducer from "./tasks";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   notes: NotesReducer,
   notebooks: notebooksReducer,
+  tasks: tasksReducer,
 })
 
 

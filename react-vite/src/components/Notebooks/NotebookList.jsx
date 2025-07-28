@@ -8,7 +8,6 @@ import './NotebookList.css';
 
 // This is the NotebookList function
 function NotebookList() {
-    console.log("NotebookList.jsx: THIS IS THE REAL ONE!");
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
