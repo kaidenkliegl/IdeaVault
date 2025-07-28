@@ -5,6 +5,18 @@ from app.forms import NotesForm
 
 notes_routes = Blueprint('notes', __name__)
 
+# get all notes 
+@notes_routes.route('/all', methods=['GET'])
+@login_required
+def get_all_notes():
+    notes = (
+        Notes.query
+        .join(Notebook) 
+        .filter(Notebook.user_id == current_user.id)
+        .order_by(Notes.updated_at.desc()) 
+        .all()
+    )
+    return {"notes": [note.to_dict() for note in notes]}
 
 # get all notes for a notebook
 @notes_routes.route('/notebook/<int:notebook_id>/notes', methods=['GET'])

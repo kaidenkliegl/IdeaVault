@@ -1,0 +1,51 @@
+.about-page {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #ECECEC; /* light gray */
+    color: #2C2C54; /* dark indigo */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(44, 44, 84, 0.1); /* shadow matching dark indigo */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+  }
+  
+  .about-page h1 {
+    color: #474787; /* deep purple-gray */
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 2.5rem;
+  }
+  
+  .about-page p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: #2C2C54; /* dark indigo */
+  }
+  
+  .auth-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  
+  .auth-buttons button,
+  .auth-buttons a {
+    background-color: #474787; /* deep purple-gray */
+    color: #ECECEC; /* light gray */
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .auth-buttons button:hover,
+  .auth-buttons a:hover {
+    background-color: #2C2C54; /* dark indigo */
+  }
+  

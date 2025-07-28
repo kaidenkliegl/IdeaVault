@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { retrieveNote, deleteNote, updateNote } from "../../redux/notes/notesThunks";
+import './NoteDetail.css'
 
 // Extended toolbar (similar to Google Docs but stable)
 const modules = {
@@ -63,13 +64,14 @@ function NoteDetail() {
     navigate(`/notebook/${note.notebook_id}/notes`);
   };
 
-  if (!note) return <div>Loading...</div>;
+  if (!note) return <div className="loading-message">Loading...</div>;
 
   return (
     <div className="note-detail-container">
-      <div>
+      <div className="title-section">
         {isEditingTitle ? (
           <input
+            className="title-input"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             onBlur={() => setIsEditingTitle(false)}
@@ -77,13 +79,14 @@ function NoteDetail() {
           />
         ) : (
           <>
-            <h3>{title}</h3>
-            <button onClick={() => setIsEditingTitle(true)}>Edit Title</button>
+            <h3 className="note-title">{title}</h3>
+            <button className="edit-title-button" onClick={() => setIsEditingTitle(true)}>Edit Title</button>
           </>
         )}
       </div>
 
       <ReactQuill
+        className="quill-editor"
         theme="snow"
         value={content}
         onChange={setContent}
@@ -92,7 +95,7 @@ function NoteDetail() {
         style={{ minHeight: "300px", marginBottom: "20px" }}
       />
 
-      <button onClick={handleDelete}>Delete Note</button>
+      <button className="delete-note-button" onClick={handleDelete}>Delete Note</button>
     </div>
   );
 }

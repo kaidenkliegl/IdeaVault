@@ -9,6 +9,9 @@ import NoteDetail from '../components/NotesPage/NoteDetail';
 import NoteForm from '../components/NotesPage/NoteForm';
 import TaskList from '../components/Tasks/TaskList';
 import TaskForm from '../components/Tasks/TaskForm';
+import AboutPage from '../components/AboutPage/About';
+import AllNotesList from '../components/NotesPage/UserNotes';
+
 import Layout from './Layout';
 
 export const router = createBrowserRouter([
@@ -66,6 +69,14 @@ export const router = createBrowserRouter([
       {
         path: "tasks/:taskId/edit",
         element: <TaskForm />
+      },
+      {
+        path: "about",
+        element: <AboutPage />
+      },
+      {
+        path: "notes/all",
+        element: <AllNotesList />
       }
     ],
   },

@@ -4,7 +4,19 @@ import { setNote, setNotes, newNote, removeNote, editNote} from "./notesAction";
 
 
 
+// get all notes 
+export const thunkFetchAllNotes = () => async (dispatch) => {
+    const res = await fetch('/api/notes/all');
 
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(setNotes(data.notes)); // use your existing action
+        return data.notes;
+    } else {
+        const errorData = await res.json();
+        return errorData;
+    }
+};
 
 // Get all notes for a notebook
 export const retrieveNotes = (notebookId) => async (dispatch) => {
