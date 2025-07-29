@@ -13,6 +13,8 @@ import AboutPage from '../components/AboutPage/About';
 import AllNotesList from '../components/NotesPage/UserNotes';
 import SelectNotebook from '../components/Notebooks/SelectNotebook';
 import TaskNotes from '../components/Tasks/TasksNotes';
+import TagList from '../components/Tags/TagsList';
+import EditTagForm from '../components/Tags/EditTagForm';
 
 import Layout from './Layout';
 
@@ -34,19 +36,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "notebooks",
-        element: <NotebookList/>
+        element: <NotebookList />
       },
       {
         path: "notebooks/new",
-        element: <NotebookForm/>
+        element: <NotebookForm />
       },
       {
         path: "notebooks/:notebookId/edit",
-        element: <NotebookForm/>
+        element: <NotebookForm />
       },
       {
         path: "notebooks/:notebookId",
-        element: <NotebookDetails/>
+        element: <NotebookDetails />
       },
       {
         path: "notebook/:notebookId/notes",
@@ -55,7 +57,7 @@ export const router = createBrowserRouter([
       {
         path: "notes/:noteId",
         element: <NoteDetail />,
-      }, 
+      },
       {
         path: "notebook/:notebookId/notes/new",
         element: <NoteForm />,
@@ -66,7 +68,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "tasks/select",
-        element:<TaskNotes />
+        element: <TaskNotes />
       },
       {
         path: "tasks/new/:taskNoteId",
@@ -85,9 +87,21 @@ export const router = createBrowserRouter([
         element: <AllNotesList />
       },
       {
-        path:"notebook/select", 
+        path: "notebook/select",
         element: <SelectNotebook />
-      }
+      },
+       {
+        path: "tags",
+        element: <TagList />  // List all tags,
+      },
+      // {
+      //   path: "tags/new",
+      //   element: <CreateTagForm />, // Form to create a new tag
+      // },
+      {
+        path: "tags/:tagId/edit",
+        element: <EditTagForm />, // Form to edit an existing tag
+      },
     ],
   },
 ]);
