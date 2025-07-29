@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getTagThunk, updateTagThunk } from "../../redux/tags";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch} from "react-redux";
+import { getTagThunk, updateTagThunk } from "../../redux/tags/tagsThunk";
 import { useParams, useNavigate } from "react-router-dom";
 
 const EditTagForm = () => {

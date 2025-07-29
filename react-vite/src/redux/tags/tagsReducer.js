@@ -1,4 +1,4 @@
-import { SET_TAGS, SET_TAG, ADD_TAG, UPDATE_TAG, DELETE_TAG } from "./tagsActions";
+import { SET_TAGS, SET_TAG, CREATE_TAG, UPDATE_TAG, DELETE_TAG } from "./tagsActions";
 
 const initialState = {
     byId: {},

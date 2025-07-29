@@ -1,13 +1,13 @@
-import React from "react";
+
 import { useDispatch } from "react-redux";
-import { removeTag } from "../../redux/tags/tagsThunk";
+import { deleteTagThunk } from "../../redux/tags/tagsThunk";
 
 const DeleteTagButton = ({ tagId, onDelete }) => {
     const dispatch = useDispatch();
 
     const handleDelete = async () => {
         if (window.confirm("Delete this tag?")) {
-            await dispatch(removeTag(tagId));
+            await dispatch(deleteTagThunk(tagId));
             if (onDelete) onDelete();
         }
     };

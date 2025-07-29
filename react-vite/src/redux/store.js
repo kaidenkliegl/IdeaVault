@@ -16,6 +16,7 @@ const rootReducer = combineReducers({
   notes: NotesReducer,
   notebooks: notebooksReducer,
   tasks: tasksReducer,
+  tags: tagsReducer,
 })
 
 

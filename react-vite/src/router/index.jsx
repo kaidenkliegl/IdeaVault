@@ -1,3 +1,4 @@
+import { Navigate } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
@@ -13,6 +14,9 @@ import AboutPage from '../components/AboutPage/About';
 import AllNotesList from '../components/NotesPage/UserNotes';
 import SelectNotebook from '../components/Notebooks/SelectNotebook';
 import TaskNotes from '../components/Tasks/TasksNotes';
+import CreateTagForm from '../components/Tags/CreateTagForm';
+import EditTagForm from '../components/Tags/EditTagForm';
+import TagsList from '../components/Tags/TagsList';
 
 import Layout from './Layout';
 
@@ -20,6 +24,10 @@ export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
+      {
+        path: "/",
+        element: <Navigate to="/home" />,
+      },
       {
         path: "/home",
         element: <h1>Welcome To IdeaVault!</h1>,
@@ -87,10 +95,10 @@ export const router = createBrowserRouter([
       {
         path: "notebook/select",
         element: <SelectNotebook />
-      }
-       {
+      },
+      {
         path: "tags",
-        element: <TagList />  // List all tags,
+        element: <TagsList />  // List all tags,
       },
       {
         path: "tags/new",

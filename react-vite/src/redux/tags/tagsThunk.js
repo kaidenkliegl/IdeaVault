@@ -1,8 +1,10 @@
-import { setTags, setTag, addTag, updateTag, deleteTag } from "./tagsActions";
+import { setTags, setTag, createTag, updateTag, deleteTag } from "./tagsActions";
 
 // GET all tags for user
 export const getTagsThunk = () => async (dispatch) => {
-    const res = await fetch("/api/tags");
+    const res = await fetch("/api/tags", {
+        credentials: "include",
+    });
     if (!res.ok) throw res;
     const data = await res.json();
     //data.tagss is an array
@@ -27,7 +29,7 @@ export const createNewTagThunk = (tagInfo) => async (dispatch) => {
     });
     if (!res.ok) throw res;
     const data = await res.json();
-    dispatch(addTag(data.tag));
+    dispatch(createTag(data.tag));
     return data.tag;
 };
 

@@ -1,7 +1,7 @@
 
-export const SET_TAGS = 'tags/setTags';
-export const SET_TAG = 'tags/setTag';
-export const ADD_TAG = 'tags/addTag';
+export const SET_TAGS = 'tags/setTags';// get all tags
+export const SET_TAG = 'tags/setTag'; // get single tag
+export const CREATE_TAG = 'tags/createTag';
 export const UPDATE_TAG = 'tags/updateTag';
 export const DELETE_TAG = 'tags/deleteTag';
 
@@ -16,8 +16,8 @@ export const setTag = (tag) => ({
     payload: tag,
 });
 
-export const addTag = (tag) => ({
-    type: ADD_TAG,
+export const createTag = (tag) => ({
+    type: CREATE_TAG,
     payload: tag,
 });
 
