@@ -31,7 +31,7 @@ function NotesList({ notebookId: propNotebookId }) {
   };
 
   return (
-    <div className="notes-list-container"     style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+    <div className="notes-list-container"   >
       {notes.map((note) => (
         <Link key={note.id} to={`/notes/${note.id}`}>
           <NoteItem note={note} onDelete={handleDelete} />
