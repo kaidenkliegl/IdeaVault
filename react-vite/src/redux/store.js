@@ -6,12 +6,20 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
+import NotesReducer from "./notes/notesReducer";
 import notebooksReducer from "./notebooks";
+import tasksReducer from "./tasks";
+import tagsReducer from "./tags/tagsReducer";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  notes: NotesReducer,
   notebooks: notebooksReducer,
-});
+  tasks: tasksReducer,
+  tags: tagsReducer
+})
+
+
 
 let enhancer;
 if (import.meta.env.MODE === "production") {
