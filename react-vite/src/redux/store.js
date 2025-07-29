@@ -9,6 +9,7 @@ import sessionReducer from "./session";
 import NotesReducer from "./notes/notesReducer";
 import notebooksReducer from "./notebooks";
 import tasksReducer from "./tasks";
+import tagsReducer from "./tags/tagsReducer";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
