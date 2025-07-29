@@ -1,0 +1,15 @@
+.homepage-container {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    align-items: flex-start;
+  }
+  
+  .home-notes {
+    flex: 2;
+  }
+  
+  .home-notebooks {
+    flex: 1;
+  }
+  

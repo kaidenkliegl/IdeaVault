@@ -44,19 +44,19 @@ function ProfileButton() {
   };
 
   return (
-    <>
+    <div className="profile-wrapper">
       <button className="profile-button" onClick={toggleMenu}>
         <FaUserCircle />
       </button>
       {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
+        <ul className="profile-dropdown" ref={ulRef}>
           {user ? (
             <>
-              <li>{user.username}</li>
-              <li>{user.email}</li>
-              <li>
-                <button onClick={logout}>Log Out</button>
-              </li>
+              <li className="user-info">{user.username}</li>
+              <li className="user-info">{user.email}</li>
+              
+                <button className="logout-btn" onClick={logout}>Log Out</button>
+              
             </>
           ) : (
             <>
@@ -74,8 +74,9 @@ function ProfileButton() {
           )}
         </ul>
       )}
-    </>
+    </div>
   );
+  
 }
 
 export default ProfileButton;

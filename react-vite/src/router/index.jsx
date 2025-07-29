@@ -15,6 +15,7 @@ import SelectNotebook from '../components/Notebooks/SelectNotebook';
 import TaskNotes from '../components/Tasks/TasksNotes';
 import TagList from '../components/Tags/TagsList';
 import EditTagForm from '../components/Tags/EditTagForm';
+import HomePage from '../components/HomePage/HomePage';
 
 import Layout from './Layout';
 
@@ -24,7 +25,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/home",
-        element: <h1>Welcome To IdeaVault!</h1>,
+        element: <HomePage />,
       },
       {
         path: "login",
