@@ -1,8 +1,7 @@
-
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import './About.css'
+import "./About.css";
 
 function AboutPage() {
   return (
@@ -17,16 +16,20 @@ function AboutPage() {
         reality!
       </p>
 
-      <div className="auth-buttons">
-        <OpenModalMenuItem
-          itemText="Log In"
-          modalComponent={<LoginFormModal />}
-        />
-        <OpenModalMenuItem
-          itemText="Sign Up"
-          modalComponent={<SignupFormModal />}
-        />
-      </div>
+      <ul className="auth-buttons">
+        <button className="auth-button">
+          <OpenModalMenuItem
+            itemText="Log In"
+            modalComponent={<LoginFormModal />}
+          />
+        </button>
+        <button className="auth-button">
+          <OpenModalMenuItem
+            itemText="Sign Up"
+            modalComponent={<SignupFormModal />}
+          />
+        </button>
+      </ul>
     </div>
   );
 }
