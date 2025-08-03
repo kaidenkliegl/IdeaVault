@@ -26,7 +26,7 @@ export default function Sidebar() {
             <NavLink className="create-btn" to="tasks/select">+ Task</NavLink>
           </li>
           <li>
-            <NavLink className="create-btn" to="">+ Tag</NavLink>
+            <NavLink className="create-btn" to="tags/new">+ Tag</NavLink>
           </li>
 
           {/* Regular navigation */}

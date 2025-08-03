@@ -1,6 +1,26 @@
 import { setNote, setNotes, newNote, removeNote, editNote } from "./notesAction";
 
+// add a tag to a note
+export const tagNoteThunk = (noteId, tagId) => async (dispatch) => {
+  const res = await fetch(`/api/notes/${noteId}/tags/${tagId}`, {
+    method: "POST",
+    credentials: "include"
+  });
+  if (!res.ok) throw res;
+  // Refresh the note's data so the UI updates
+  dispatch(retrieveNote(noteId));
+};
 
+// remove a tag from a note
+export const untagNoteThunk = (noteId, tagId) => async (dispatch) => {
+  const res = await fetch(`/api/notes/${noteId}/tags/${tagId}`, {
+    method: "DELETE",
+    credentials: "include"
+  });
+  if (!res.ok) throw res;
+  // Refresh the note's data so the UI updates
+  dispatch(retrieveNote(noteId));
+};
 
 
 
