@@ -19,7 +19,7 @@ def create_new_tag():
     form = TagForm()
     form['csrf_token'].data = request.cookies.get('csrf_token')
     form.name.data = request.json.get('name')
-
+    
     if form.validate_on_submit():
          #check if tag name exist for this user
         existing_tag = Tag.query.filter_by(user_id=current_user.id, name=form.name.data).first()
@@ -33,7 +33,9 @@ def create_new_tag():
         db.session.add(new_tag)
         db.session.commit()
         return {'tag': new_tag.to_dict()}, 201
-
+    # print("Request JSON:", request.json)
+    # print("Form errors:", form.errors)
+    # print("Form data:", form.name.data)
     return {'errors': form.errors}, 400
 
 

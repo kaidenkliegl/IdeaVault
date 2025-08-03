@@ -16,7 +16,7 @@ import TaskNotes from '../components/Tasks/TasksNotes';
 import TagList from '../components/Tags/TagsList';
 import EditTagForm from '../components/Tags/EditTagForm';
 import HomePage from '../components/HomePage/HomePage';
-
+import CreateTagForm from '../components/Tags/CreateTagForm';
 import Layout from './Layout';
 
 export const router = createBrowserRouter([
@@ -91,14 +91,14 @@ export const router = createBrowserRouter([
         path: "notebook/select",
         element: <SelectNotebook />
       },
-       {
+      {
         path: "tags",
         element: <TagList />  // List all tags,
       },
-      // {
-      //   path: "tags/new",
-      //   element: <CreateTagForm />, // Form to create a new tag
-      // },
+      {
+        path: "tags/new",
+        element: <CreateTagForm />, // Form to create a new tag
+      },
       {
         path: "tags/:tagId/edit",
         element: <EditTagForm />, // Form to edit an existing tag

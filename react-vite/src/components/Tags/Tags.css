@@ -1,0 +1,164 @@
+/* === Tag List & Form Styling === */
+.tag-list {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(71, 71, 135, 0.07);
+    max-width: 520px;
+    margin: 2rem auto;
+}
+
+.tag-list h2 {
+    color: #2C2C54;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.tag-list ul {
+    list-style: none;
+    margin: 0 0 1rem 0;
+    padding: 0;
+}
+
+.tag-list-item,
+.tag-list li {
+    display: flex;
+    align-items: center;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid #ececec;
+}
+
+.tag-list-item:last-child,
+.tag-list li:last-child {
+    border-bottom: none;
+}
+
+.tag-name,
+.tag-list span {
+    flex: 1 1 auto;
+    font-size: 1.08rem;
+    color: #474787;
+    letter-spacing: 0.02em;
+}
+
+.delete-tag-btn,
+.edit-tag-btn {
+    background: none;
+    border: none;
+    color: #474787;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.edit-tag-btn {
+    margin-left: 8px;
+    background: #ecd5ff;
+    color: #5a189a;
+    border: none;
+    border-radius: 5px;
+    padding: 0.33rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.18s;
+    text-decoration: none;
+}
+
+.edit-tag-btn:hover {
+    background: #c8b6ff;
+    color: #2C2C54;
+}
+
+.add-tag-button {
+    display: block;
+    width: 75%;
+    margin: 1.6rem auto 0 auto;
+    padding: 0.8rem 0;
+    background: #474787;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+    text-align: center;
+    transition: background 0.18s;
+    text-decoration: none;
+}
+
+.add-tag-button:hover {
+    background: #6C63FF;
+    color: #fff;
+}
+
+/* Tag Form Styles */
+.create-tag-form,
+.edit-tag-form {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(71, 71, 135, 0.08);
+    max-width: 460px;
+    margin: 2.5rem auto;
+    padding: 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.create-tag-form h2,
+.edit-tag-form h2 {
+    color: #6C63FF;
+    margin-bottom: 1.2rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.create-tag-form input,
+.edit-tag-form input {
+    border: 2px solid #ececec;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 1.06rem;
+    background: #f7f6fe;
+    margin-bottom: 1.3rem;
+    transition: border-color 0.22s;
+}
+
+.create-tag-form input:focus,
+.edit-tag-form input:focus {
+    border-color: #6C63FF;
+    outline: none;
+}
+
+.create-tag-form button,
+.edit-tag-form button {
+    background: #474787;
+    color: #fff;
+    font-size: 1.08rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 0;
+    cursor: pointer;
+    margin-top: 0.7rem;
+    transition: background 0.18s;
+}
+
+.create-tag-form button:hover,
+.edit-tag-form button:hover {
+    background: #6C63FF;
+}
+
+.error,
+.form-error {
+    color: #d93025;
+    font-size: 0.95rem;
+    margin: 0.5rem 0 0;
+    text-align: center;
+}

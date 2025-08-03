@@ -29,7 +29,9 @@ const deleteTask = (taskId) => ({
 
 // These are going to be the thunbks for tasks
 export const thunkFetchTasks = () => async (dispatch) => {
-    const res = await fetch('/api/tasks/');
+    const res = await fetch('/api/tasks/', {
+        credentials: "include"
+    });
     if (res.ok) {
         const data = await res.json();
         dispatch(setTasks(data.tasks));
@@ -38,11 +40,13 @@ export const thunkFetchTasks = () => async (dispatch) => {
 };
 
 export const thunkCreateTask = (noteId, taskData) => async (dispatch) => {
-    const res = await fetch(`/api/tasks/notes/${noteId}/tasks`, 
-        {method: 'POST', 
+    const res = await fetch(`/api/tasks/notes/${noteId}/tasks`,
+        {
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(taskData)
-    });
+            body: JSON.stringify(taskData),
+            credentials: 'include' // Make sure cookies are sent!   
+        });
 
     if (res.ok) {
         const data = await res.json();
@@ -51,17 +55,18 @@ export const thunkCreateTask = (noteId, taskData) => async (dispatch) => {
 
     } else if (res.status < 500) {
         const data = await res.json();
-        return data; 
+        return data;
     } else {
-        return { server: 'Something went wrong. Please try again'};
+        return { server: 'Something went wrong. Please try again' };
 
     }
 };
 
 export const thunkUpdateTask = (taskId, taskData) => async (dispatch) => {
-    const res = await fetch(`/api/tasks/${taskId}`, 
-        { method: 'PUT', 
-            headers: { 'Content-Type': 'application/json' }, 
+    const res = await fetch(`/api/tasks/${taskId}`,
+        {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(taskData)
         });
 
@@ -72,15 +77,18 @@ export const thunkUpdateTask = (taskId, taskData) => async (dispatch) => {
 
     } else if (res.status < 500) {
         const data = await res.json();
-        return data; 
+        return data;
     } else {
-        return { server: 'Something went wrong. Please try again'};
+        return { server: 'Something went wrong. Please try again' };
 
     }
 };
 
 export const thunkDeleteTask = (taskId) => async (dispatch) => {
-    const res = await fetch(`/api/tasks/${taskId}`, { method: 'DELETE' });
+    const res = await fetch(`/api/tasks/${taskId}`, {
+        method: 'DELETE',
+        credentials: 'include' // Make sure cookies are sent!
+    });
 
     if (res.ok) {
 
@@ -89,9 +97,9 @@ export const thunkDeleteTask = (taskId) => async (dispatch) => {
 
     } else if (res.status < 500) {
         const data = await res.json();
-        return data; 
+        return data;
     } else {
-        return { server: 'Something went wrong. Please try again'};
+        return { server: 'Something went wrong. Please try again' };
 
     }
 };
@@ -116,9 +124,9 @@ function tasksReducer(state = initialState, action) {
                 ...state,
                 [action.payload.id]: action.payload
             };
-        
+
         case DELETE_TASK: {
-            const newState = {...state};
+            const newState = { ...state };
             delete newState[action.payload];
             return newState;
         }
