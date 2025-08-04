@@ -11,7 +11,7 @@ const CreateTagForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("handleSubmit called");
+
         setError(null);
 
         const result = await dispatch(createNewTagThunk({ name }));
@@ -23,25 +23,7 @@ const CreateTagForm = () => {
         } else {
             setError("Error creating tag.");
         }
-        // try {
-        //     const result = await dispatch(createNewTagThunk({ name }));
-        //     console.log("Tag creation result:", result);
-        //     // result should be { tag: ... } if successful
-        //     if (result && result.tag) {
-        //         //await dispatch(getTagsThunk());
-        //         navigate("/tags"); // Navigate to tags list after creation
 
-        //     }
-        // } catch (err) {
-        //     if (err.json) {
-        //         // If the error response has a JSON body, parse it
-        //         const data = await err.json();
-        //         setError(data.error || data.errors?.name?.[0] || "Error creating tag");
-        //     } else {
-        //         setError("Error creating tag.");
-
-        //     }
-        // }
     };
 
     return (

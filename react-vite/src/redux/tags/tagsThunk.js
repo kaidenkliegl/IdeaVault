@@ -51,7 +51,7 @@ export const createNewTagThunk = (tagInfo) => async (dispatch) => {
         }
 
         const data = await res.json();
-        console.log("Thunk result:", data);
+
         dispatch(addTag(data.tag));
         return data;
     } catch (err) {
