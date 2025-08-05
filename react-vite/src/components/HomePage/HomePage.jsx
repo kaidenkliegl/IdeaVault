@@ -1,7 +1,7 @@
 
 import AllNotesList from '../NotesPage/UserNotes';
 import NotebookList from '../Notebooks/NotebookList';
-import './Homepage.css';  // Optional: for styling
+import './HomePage.css';  // Optional: for styling
 
 function HomePage() {
   return (

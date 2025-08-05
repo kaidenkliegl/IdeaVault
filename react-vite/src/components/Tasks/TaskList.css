@@ -1,1 +1,130 @@
-/* react-vite/src/components/Tasks/TaskList.css*/
+/* ===== TaskList Page Styling ===== */
+.task-list-container {
+    max-width: 640px;
+    margin: 2rem auto 0 auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(71, 71, 135, 0.09);
+    padding: 2.2rem 2.7rem;
+}
+
+.task-list-container h1 {
+    text-align: center;
+    color: #6C63FF;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    margin-bottom: 2rem;
+}
+
+.task-create-button {
+    background: #474787;
+    color: #fff;
+    font-size: 1.07rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(44, 44, 84, 0.08);
+    padding: 0.7rem 1.7rem;
+    letter-spacing: 0.02em;
+    margin: 0 0 2.3rem 0;
+    transition: background 0.19s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.task-create-button:hover {
+    background: #6C63FF;
+    color: #fff;
+}
+
+.task-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f7f6fe;
+    border-radius: 10px;
+    padding: 1.2rem 1rem;
+    box-shadow: 0 2px 8px rgba(71, 71, 135, 0.04);
+    transition: background 0.16s;
+}
+
+.task-item:hover {
+    background: #ece9fa;
+}
+
+.task-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.task-info input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    accent-color: #6C63FF;
+}
+
+.task-info .completed {
+    color: #b1b1b1;
+    text-decoration: line-through;
+    font-style: italic;
+}
+
+.task-info span {
+    font-size: 1.15rem;
+    color: #474787;
+    transition: color 0.18s;
+}
+
+.task-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.task-edit-button,
+.task-delete-button {
+    background: #ecd5ff;
+    color: #6C63FF;
+    border: none;
+    border-radius: 6px;
+    padding: 0.33rem 1.1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.18s;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+}
+
+.task-edit-button:hover {
+    background: #c8b6ff;
+    color: #2C2C54;
+}
+
+.task-delete-button {
+    background: #f44444;
+    color: #fff;
+}
+
+.task-delete-button:hover {
+    background: #d93025;
+}
+
+.loading {
+    text-align: center;
+    color: #6C63FF;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+}

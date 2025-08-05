@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getTagThunk, updateTagThunk } from "../../redux/tags/tagsThunk";
 import { useParams, useNavigate } from "react-router-dom";
@@ -31,7 +31,7 @@ const EditTagForm = () => {
 
         try {
             await dispatch(updateTagThunk(tagId, { name })).unwrap?.();
-            navigate(`/tags/${tagId}`); // Navigate to the tag details page
+            navigate(`/tags`); // Navigate to the tag details page
         } catch (err) {
             if (err.json) {
                 const data = await err.json();

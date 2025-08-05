@@ -41,12 +41,12 @@ app.register_blueprint(notes_routes, url_prefix='/api/notes')
 app.register_blueprint(notebook_routes, url_prefix='/api/notebooks')
 app.register_blueprint(tasks_routes, url_prefix='/api/tasks')
 app.register_blueprint(tag_routes, url_prefix='/api/tags')
-app.register_blueprint(tagging_notes_routes, url_prefix='/api/tagging_notes')
+app.register_blueprint(tagging_notes_routes, url_prefix='/api')
 db.init_app(app)
 Migrate(app, db)
 
 # Application Security
-CORS(app)
+CORS(app, supports_credentials=True, origins=["http://localhost:5173"]) # added for CORS support 
 
 
 # Since we are deploying with Docker and Flask,
