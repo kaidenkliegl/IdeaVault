@@ -72,6 +72,10 @@ export const router = createBrowserRouter([
         element: <TaskNotes />
       },
       {
+        path: "tasks/new",
+        element: <TaskForm />
+      },
+      {
         path: "tasks/new/:taskNoteId",
         element: <TaskForm />
       },
